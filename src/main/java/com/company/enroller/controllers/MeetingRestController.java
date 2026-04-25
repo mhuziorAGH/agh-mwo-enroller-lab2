@@ -51,4 +51,17 @@ public class MeetingRestController{
         meetingService.delete(meeting);
         return new ResponseEntity<Participant>(HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody Meeting updatedMeeting) {
+        Meeting meeting = meetingService.findById(id);
+        if (meeting == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        meeting.setDescription(updatedMeeting.getDescription());
+        meeting.setTitle(updatedMeeting.getTitle());
+        meeting.setDate(updatedMeeting.getDate());
+        meetingService.update(meeting);
+        return new ResponseEntity<Participant>(HttpStatus.OK);
+    }
 }
