@@ -35,4 +35,10 @@ public class MeetingService {
         return meeting;
     }
 
+    public void delete(Meeting meeting) {
+        Transaction transaction = session.getSession().beginTransaction();
+        session.getSession().delete(meeting);
+        transaction.commit();
+    }
+
 }
